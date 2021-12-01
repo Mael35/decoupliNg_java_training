@@ -1,7 +1,8 @@
 package fr.lernejo.guessgame;
 import fr.lernejo.logger.Logger;
 import fr.lernejo.logger.LoggerFactory;
-import java.security.SecureRandom;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Simulation {
 
@@ -49,16 +50,43 @@ public class Simulation {
         return false;
     }
 
-    public void loopUntilPlayerSucceed() {
+    public void loopUntilPlayerSucceed(long nbmax) {
         //TODO implement me
         int count = 0;
+        boolean failed = false;
+        long beforeTime = System.currentTimeMillis();
 
         while(!nextRound())
         {
             count++;
+
+            if (count == nbmax)
+            {
+                logger.log("No more try ...\n");
+                failed = true;
+                break;
+            }
+
             logger.log("Try again !\n");
         }
 
-        logger.log("You founds in " + count + " round(s) !\n");
+        if (!failed)
+        {
+            logger.log("You founds in " + count + " round(s) !\n");
+        }
+
+        else
+        {
+            logger.log("The number was " + numberToGuess + " !\n");
+        }
+
+        long currentTime = System.currentTimeMillis();
+
+        long timeUsed = currentTime - beforeTime;
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss:SSS");
+        Date date = new Date(timeUsed);
+        String time = simpleDateFormat.format(date);
+        logger.log("Time elapsed : " + time + "\n");
     }
 }
