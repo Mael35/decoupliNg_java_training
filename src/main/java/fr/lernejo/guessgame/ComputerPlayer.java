@@ -1,6 +1,11 @@
 package fr.lernejo.guessgame;
 
+import fr.lernejo.logger.Logger;
+import fr.lernejo.logger.LoggerFactory;
+
 public class ComputerPlayer implements Player {
+
+    Logger logger = LoggerFactory.getLogger("computer");
 
     private long high = Long.MAX_VALUE;
     private long low = 0;
@@ -23,7 +28,7 @@ public class ComputerPlayer implements Player {
             this.high = this.current;
         }
 
-        System.out.print(this.current);
+        logger.log(this.current + "\n");
     }
 
 }
