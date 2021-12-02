@@ -52,7 +52,7 @@ public class Simulation {
 
     public void loopUntilPlayerSucceed(long nbmax) {
         //TODO implement me
-        int count = 0;
+        int count = 1;
         boolean failed = false;
         long beforeTime = System.currentTimeMillis();
 
